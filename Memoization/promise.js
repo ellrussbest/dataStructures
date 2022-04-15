@@ -28,3 +28,26 @@ asyncFunc( division(3, 3) )
 });
 
 console.log("End");
+
+const recordVideoOne = new Promise( (resolve, reject) => {
+	resolve('video 1 recorded');
+});
+
+
+const recordVideoTwo = new Promise ( (resolve, reject) => {
+	resolve('Video 2 recorded');
+});
+
+const recordVideoThree = new Promise ( (resolve, reject) => {
+	resolve('Video 2 recorded');
+});
+
+Promise.all([
+	recordVideoOne,
+	recordVideoTwo,
+	recordVideoThree
+]).then( (resolved) => {
+	console.log(resolved)
+});
+
+// we also have Promise.race - this on the other hand, will return the first promise to complete execution. It is almost the same to Promise.all but it returns the first promise in the array of promises to be completed.
