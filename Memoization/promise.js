@@ -50,4 +50,35 @@ Promise.all([
 	console.log(resolved)
 });
 
+
 // we also have Promise.race - this on the other hand, will return the first promise to complete execution. It is almost the same to Promise.all but it returns the first promise in the array of promises to be completed.
+//
+
+
+const x = false;
+let d = new Promise( (resolve, reject) => {
+        if (x == true) {
+                resolve("The value is true");
+        }else{
+                reject("The value is false");
+        }
+});
+
+d
+.then( (resolved) => console.log(resolved),
+        (rejected) => console.log(rejected)
+);
+
+console.log(d instanceof Promise);
+
+const someFunc = async() => {
+        try{
+                const a = await d;
+                console.log(a);
+        }catch(rejected){
+                console.log(rejected);
+        }
+}
+
+someFunc();
+
