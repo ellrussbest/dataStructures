@@ -27,6 +27,15 @@ asyncFunc( division(3, 3) )
     console.log(rejected);
 });
 
+asyncFunc(division(6, 2))
+.then((resolved) => {
+    console.log(`the quations is ${resolved}`)
+})
+.then()
+.catch((rejected) => {
+    console.error(rejected);
+})
+
 console.log("End");
 
 const recordVideoOne = new Promise( (resolve, reject) => {
