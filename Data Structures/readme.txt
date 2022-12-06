@@ -11,3 +11,15 @@ The following are the class headers that you can find in c++ programming
 	e.g. stringstream newInstance;
 		newIntance<<int;
 		newInstance>>str;
+
+Todos:
+
+1. Matrix and its operations
+- addition and scalar
+- multiplication
+- tranpositon
+
+2. Gap buffer
+3. AVL tree
+4. Decision tree
+5. Red-Black Tree
