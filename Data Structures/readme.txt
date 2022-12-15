@@ -23,3 +23,6 @@ Todos:
 3. AVL tree
 4. Decision tree
 5. Red-Black Tree
+
+checkout the following link to understand dynamic memory allocation in matrix
+https://www.techiedelight.com/dynamic-memory-allocation-in-c-for-2d-3d-array/
