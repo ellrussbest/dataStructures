@@ -53,7 +53,7 @@ void productOfMatrix(int* first_matrix, int* second_matrix) {
             // iteration upto no of columns in first matrix
             for(int k = 0; k < cols_first; k++) {
                 // sum = sum + first_matrix[i][k] * second_matrix[k][j];
-                sum = sum + *(first_matrix + rows_first * i + k) + *(second_matrix + rows_second * j + i);
+                 sum = sum + *(first_matrix + rows_first * i + k) * *(second_matrix + rows_second * k + j);
             }
             cout << sum << " ";
         }
