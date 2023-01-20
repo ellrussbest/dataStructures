@@ -79,6 +79,27 @@ class BST {
                 return root;
             }
 
+            int balance_factor = getBalanceFactor(root);
+
+            // left left case
+            if (balance_factor > 1 && new_node->value < root->left->value) return rightRotate(root);
+
+            // right right case
+            if (balance_factor < -1 && new_node->value > root->right->value) return leftRotate(root);
+
+            // left right case
+            if (balance_factor > 1 && new_node->value > root->left->value) {
+                root->left = leftRotate(root->left);
+                return rightRotate(root);
+            }
+
+            // right left case
+            if(balance_factor < -1 && new_node->value < root->right->value) {
+                root->right = rightRotate(root->right);
+                return leftRotate(root);
+            }
+
+            /* return the (unchanged) node pointer*/
             return root;
         }
 
@@ -186,8 +207,8 @@ class BST {
         }
 
         void printLevelOrderBFS(TreeNode* root) {
-            int height = height(root);
-            for (int i = 0; i <= height; i++) {
+            int _height = height(root);
+            for (int i = 0; i <= _height; i++) {
                 printGivenLevel(root, i);
             }
         }
@@ -247,32 +268,57 @@ class BST {
                     root -> right = deleteNode(root->right, temp->value);
                 }
 
-                return root;
+                int balance_factor = getBalanceFactor(root);
+
+                // left left imbalance/case or right rotation
+                if (balance_factor == 2 && getBalanceFactor(root->left) >= 0) return rightRotate(root);
+
+                // left right imbalance/case or LR rotation
+                else if (balance_factor == 2 && getBalanceFactor(root->left) == -1) {
+                    root->left = leftRotate(root->left);
+                    return rightRotate(root);
+                }
+
+                // right right imbalance/case or left rottion
+                else if (balance_factor == -2 && getBalanceFactor(root->right) <= -0) return leftRotate(root);
+
+                // Right left imbalance/case or RL rotation
+                else if (balance_factor == -2 && getBalanceFactor(root->right) <= 1) {
+                    root->right = rightRotate(root->right);
+                    return leftRotate(root);
+                }
             }
+            return root;
         }
 
-        // int getBalanceFactor(TreeNode* n) {
-        //     if (n == NULL) {
-        //         return -1;
-        //     }
-        //     return (height(n->left) - height(n->right));
-        // }
+        int getBalanceFactor(TreeNode* root) {
+            if ( root == NULL ) return -1;
+            return height(root->left) - height(root->right);
 
-        // void left_left_rotation() {
-        //     if (root == NULL) return;
-        //     if (root->left) {
-        //         root->left->right = root;
-        //         root = root->left;
-        //     }
-        // }
+        }
 
-        // void right_right_rotation() {
-        //     if(root == NULL) return;
-        //     if(root->right) {
-        //         root->right->left = root;
-        //         root = root->right;
-        //     }
-        // }
+        TreeNode* rightRotate(TreeNode* root) {
+            TreeNode* temp_left = root->left;
+            TreeNode* temp_right = root->right;
+
+            // peform rotation
+            temp_left = root;
+            root -> left = temp_right;
+
+            return temp_left;
+        }
+
+        TreeNode* leftRotate(TreeNode* root) {
+            TreeNode* temp_right = root->right;
+            TreeNode* temp_left = root->left;
+
+            // perform rotation
+            temp_right->left = root;
+            root->right = temp_left;
+
+            return temp_right;
+        }
+
 };
 
 
@@ -288,7 +334,8 @@ int main () {
         cout << "2. Search Node" << endl;
         cout << "3. Delete Node" << endl;
         cout << "4. Print BST values" << endl;
-        cout << "5. Clear Screen" << endl;
+        cout << "5. Height of Tree" << endl;
+        cout << "6. Clear Screen" << endl;
         cout << "0. Exit program" << endl;
 
         cin >> option;
@@ -307,14 +354,50 @@ int main () {
             break;
         case 2:
             cout << "SEARCH \n";
+            cout << "Enter VALUE of TREE NODE to SEARCH in AVL Tree: ";
+            cin >> val;
+            new_node = obj.recursiveSearch(obj.root, val);
+            if (new_node != NULL) {
+                cout << "Value found" << endl;
+            } else {
+                cout << "Value Not found" << endl;
+            }
             break;
         case 3:
-            /* code */
+            cout << "DELETE" << endl;
+            cout << "Enter VALUE of TREE NODE to DELETE in AVL: ";
+            cin >> val;
+            new_node = obj.recursiveSearch(obj.root, val);
+            if (new_node != NULL) {
+                obj.root = obj.deleteNode(obj.root, val);
+                cout << "Value Deleted" << endl;
+            }else {
+                cout << "Value NOT found" << endl;
+            }
             break;
         case 4:
-            /* code */
+            cout << "PRINT 2D" << endl;
+            obj.print2D(obj.root, 5);
+            cout << endl;
+            cout <<  "Print level order BFS: \n";
+            obj.printLevelOrderBFS(obj.root);
+            cout << endl;
+
+            cout << "PRE-ORDER: ";
+            obj.printPreorder(obj.root);
+            cout << endl;
+
+            cout << "IN-ORDER: ";
+            obj.printInorder(obj.root);
+            cout << endl;
+            cout << "POST-ORDER: ";
+            obj.printPostorder(obj.root);
             break;
         case 5:
+            cout << "TREE HEIGHT" << endl;
+            cout << "Height : " << obj.height(obj.root) << endl;
+            break;
+        case 6:
             system("clear");
             break;
 
