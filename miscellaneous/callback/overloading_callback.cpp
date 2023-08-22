@@ -10,10 +10,6 @@ typedef enum TypeTag {
 typedef struct Node {
     TypeTag type;
     int result;
-    union {
-        Node* (*makeFuncInt)(int, int);
-        Node* (*makeFuncNode)(Node*, Node*);
-    };
 } Node;
 
 int fibo(int x) {
@@ -73,7 +69,7 @@ Node* mul(Node* x, Node* y) {
 }
 
 
-Node* (*makeFuncInt(TypeTag type))(int, int) {
+Node* ((*makeFuncInt(TypeTag type))(int, int)) {
     switch (type) {
         case ADD:
             return add;
@@ -86,7 +82,7 @@ Node* (*makeFuncInt(TypeTag type))(int, int) {
     }
 }
 
-Node* (*makeFuncNode(TypeTag type))(Node*, Node*) {
+Node* ((*makeFuncNode(TypeTag type))(Node*, Node*)) {
     switch (type) {
         case ADD:
             return add;
@@ -104,10 +100,10 @@ void calc(Node* result) {
 }
 
 int main() {
-    Node* add = makeFuncInt(ADD)(10, 6);
-    Node* mul = makeFuncInt(MUL)(5, 4);
-    Node* sub = makeFuncNode(SUB)(mul, add);
-    Node* fibo = makeFuncNode(SUB)(sub, NULL);
+    Node* add = (makeFuncInt(ADD)(10, 6));
+    Node* mul = (makeFuncInt(MUL)(5, 4));
+    Node* sub = (makeFuncNode(SUB)(mul, add));
+    Node* fibo = (makeFuncNode(SUB)(sub, NULL));
     calc(add);
     calc(mul);
     calc(sub);
