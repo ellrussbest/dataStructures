@@ -72,8 +72,13 @@ add_subdirectory(Child_2_Folder)
 
 In the Child_1_Folder/CMakeLists.txt:
 ```cmake
+# Add all the source files in Child_1_Folder
+# file(GLOB SOURCES "*.cpp")
+
 # Add source files to the child project
-add_library(Child_1_lib <Child_1.cpp> <Child_1.hpp>)
+add_library(Child_1_lib <SHARED | STATIC> <Child_1.cpp> <Child_1.hpp>)
+# Header-only libraries -> No source files needed
+# add_library(Child_1_lib <SHARED | STATIC> <child_1.hpp>)
 
 # Add any other configurations or targets specific to Child_1_Folder
 ```
@@ -81,7 +86,9 @@ add_library(Child_1_lib <Child_1.cpp> <Child_1.hpp>)
 In the Child_2_Folder/CMakeLists.txt:
 ```cmake
 # Add source files to the child project
-add_library(Child_2_lib <Child_2.cpp> <Child_2.hpp>)
+add_library(Child_2_lib <SHARED | STATIC> <Child_2.cpp> <Child_2.hpp>)
+# Header-only libraries -> No source files needed
+# add_library(Child_1_lib <SHARED | STATIC> <child_1.hpp>)
 
 # Add any other configurations or targets specific to Child_2_Folder
 ```
