@@ -61,7 +61,7 @@ Here's an example of how you can set it up:
 
 ```cmake
 cmake_minimum_required(VERSION <minimum_required_version>)
-project(<project_name>)
+project(<project_name> VERSION <version_number> DESCRIPTION <description_string> LANGUAGES <options: C, CXX, OBJC etc.>)
 
 # Add child directories
 add_subdirectory(Child_1_Folder)
