@@ -1,0 +1,24 @@
+{
+  "env": {
+    "myDefaultIncludePath": [
+      "${workspaceFolder}/**",
+      "${workspaceFolder}/ds/include/**"
+    ],
+    "myCompilerPath": "C:msys64mingw64\\bin\\g++"
+  },
+  "configurations": [
+    {
+      "name": "Windows",
+      "intelliSenseMode": "gcc-x64",
+      "includePath": ["${myDefaultIncludePath}"],
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "browse": {
+        "path": ["${workspaceFolder}"],
+        "limitSymbolsToIncludedHeaders": true,
+        "databaseFilename": ""
+      }
+    }
+  ],
+  "version": 4
+}

@@ -74,6 +74,12 @@ In the Child_1_Folder/CMakeLists.txt:
 ```cmake
 # Add all the source files in Child_1_Folder
 # file(GLOB SOURCES "*.cpp")
+# Generate an executable for each source file
+# foreach(SOURCE ${SOURCES})
+#     get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
+#     add_executable(${EXECUTABLE_NAME} ${SOURCE})
+#     target_link_libraries(${EXECUTABLE_NAME} my_library)  # Add this line
+# endforeach()
 
 # Add source files to the child project
 add_library(Child_1_lib <SHARED | STATIC> <Child_1.cpp> <Child_1.hpp>)
@@ -85,6 +91,15 @@ add_library(Child_1_lib <SHARED | STATIC> <Child_1.cpp> <Child_1.hpp>)
 
 In the Child_2_Folder/CMakeLists.txt:
 ```cmake
+# Add all the source files in Child_1_Folder
+# file(GLOB SOURCES "*.cpp")
+# Generate an executable for each source file
+# foreach(SOURCE ${SOURCES})
+#     get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
+#     add_executable(${EXECUTABLE_NAME} ${SOURCE})
+#     target_link_libraries(${EXECUTABLE_NAME} my_library)  # Add this line
+# endforeach()
+
 # Add source files to the child project
 add_library(Child_2_lib <SHARED | STATIC> <Child_2.cpp> <Child_2.hpp>)
 # Header-only libraries -> No source files needed
