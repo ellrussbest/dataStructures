@@ -1,3 +1,5 @@
-add_library(libstack STATIC stack.cpp)
-target_include_directories(libstack PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-set_target_properties(libstack PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../lib)
+add_library(stack STATIC stack.cpp)
+target_link_libraries(stack -L${CMAKE_SOURCE_DIR}/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
+target_include_directories(stack PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
+set_target_properties(stack PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../lib)
