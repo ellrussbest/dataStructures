@@ -1,6 +1,6 @@
 file(GLOB SOURCES "*.cpp")
 foreach(SOURCE ${SOURCES})
     get_filename_component(EXECUTABLE_NAME ${SOURCE} NAME_WE)
-    include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
     add_executable(${EXECUTABLE_NAME} ${SOURCE})
+    target_link_libraries(${EXECUTABLE_NAME} PRIVATE stack)
 endforeach()
