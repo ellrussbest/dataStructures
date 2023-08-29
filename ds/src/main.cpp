@@ -1,5 +1,4 @@
 #include "stack.hpp"
-// #include "../stack/stack.cpp"
 
 #include <iostream>
 
