@@ -30,7 +30,7 @@ namespace stack {
             catch (const std::exception &e)
             {
                 std::cout << "Exception caught: " << e.what() << std::endl;
-                std::exit(0);
+                // break;
             }
     }
 
@@ -56,7 +56,7 @@ namespace stack {
             catch (const std::exception &e)
             {
                 std::cout << "Exception caught: " << e.what() << std::endl;
-                std::exit(0);
+                // break;
             }
     }
 
@@ -101,6 +101,6 @@ namespace stack {
     {
             return this->length;
     }
-}
+} // namespace stack
 
 #endif
