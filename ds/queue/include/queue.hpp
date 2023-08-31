@@ -22,6 +22,7 @@ namespace queue
     class Queue
     {
     public:
+        ~Queue();
         int size();
         Queue &push(T const &x);
         T front();
@@ -33,6 +34,18 @@ namespace queue
         Node<T> *head = nullptr;
         Node<T> *tail = nullptr;
     };
+
+    template <typename T>
+    Queue<T>::~Queue()
+    {
+        Node<T> *temp = nullptr;
+        while (this->head != nullptr)
+        {
+            temp = this->head->next;
+            delete this->head;
+            this->head = temp;
+        }
+    }
 
     template <typename T>
     bool Queue<T>::isEmpty()
@@ -61,24 +74,30 @@ namespace queue
             this->tail->next = newNode;
             this->tail = newNode;
         }
+        this->length++;
         return *this;
     }
 
     template <typename T>
     T Queue<T>::front()
     {
-        try
-        {
-            if (this->isEmpty())
-                throw std::out_of_range("Queue is empty");
-            else
-                return this->tail->data;
-        }
-        catch (const std::exception &e)
-        {
-            std::cout << "Exception caught: " << e.what() << std::endl;
-            // break;
-        }
+
+        if (this->isEmpty())
+            throw std::out_of_range("Queue is empty");
+        return this->head->data;
+    }
+
+    template <typename T>
+    T Queue<T>::pop()
+    {
+        T data = this->head->data;
+        Node<T> *temp = this->head;
+        this->head = temp->next;
+        delete temp;
+        temp = nullptr;
+        this->length--;
+
+        return data;
     }
 } // namespace queue
 
