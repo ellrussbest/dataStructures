@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 namespace stack
 {
@@ -15,18 +16,16 @@ namespace stack
         T pop();
         bool isEmpty();
         Stack &push(T const &x);
-        int size();
+        size_t size();
 
     private:
-        T *arr = nullptr;
-        int length = 0;
+        std::vector<T> vec;
+        size_t length = 0;
     };
 
     template <typename T>
     Stack<T>::~Stack()
     {
-        delete[] this->arr;
-        this->arr = nullptr;
     }
 
     template <typename T>
@@ -35,7 +34,7 @@ namespace stack
 
         if (this->isEmpty())
             throw std::out_of_range("Stack is empty");
-        return this->arr[this->length - 1];
+        return this->vec.back();
     }
 
     template <typename T>
@@ -44,15 +43,9 @@ namespace stack
         if (this->isEmpty())
             throw std::out_of_range("Stack is empty");
 
-        T popped = this->arr[this->length - 1];
-        T *arr = new T[this->length - 1];
-
-        for (int i = 0; i < this->length - 1; i++)
-            arr[i] = this->arr[i];
-
-        delete[] this->arr;
-        this->arr = arr;
-        this->length = this->length - 1;
+        T popped = this->vec.back();
+        this->vec.pop_back();
+        this->length = this->vec.size();
         return popped;
     }
 
@@ -65,35 +58,13 @@ namespace stack
     template <typename T>
     Stack<T> &Stack<T>::push(T const &x)
     {
-        if (this->isEmpty())
-        {
-            this->length = 1;
-
-            T *arr = new T[this->length];
-            arr[0] = x;
-            this->arr = arr;
-        }
-        else
-        {
-            T *arr = new T[this->length + 1];
-
-            for (int i = 0; i < this->length + 1; i++)
-            {
-                if (i == this->length)
-                    arr[i] = x;
-                else
-                    arr[i] = this->arr[i];
-            }
-
-            this->length = this->length + 1;
-            delete[] this->arr;
-            this->arr = arr;
-        }
+        this->vec.push_back(x);
+        this->length = this->vec.size();
         return *this;
     }
 
     template <typename T>
-    int Stack<T>::size()
+    size_t Stack<T>::size()
     {
         return this->length;
     }
