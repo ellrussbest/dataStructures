@@ -1,5 +1,10 @@
 #include <iostream>
 
+/*
+* The idea behind this Algorithm is that after every Iteration, 
+* the most mininum/maximum value will have been sorted into its position
+*
+*/
 void selection_sort(int* arr, int size) {
     for(int i = 0; i < size - 1; i++) {
         int min = i;
