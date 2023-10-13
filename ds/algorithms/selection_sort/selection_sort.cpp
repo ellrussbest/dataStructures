@@ -1,7 +1,7 @@
 #include <iostream>
 
 /*
-* The idea behind this Algorithm is that after every Iteration, 
+* The idea behind this Algorithm is that after every inner Iteration, 
 * the most mininum/maximum value will have been sorted into its position
 *
 */
