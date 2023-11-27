@@ -1,5 +1,6 @@
 #include <iostream>
 
+// Everything that will come before J will be sorted after each iteration
 // insertion sort
 void insertion_sort(int* arr, int size) {
     int key;
